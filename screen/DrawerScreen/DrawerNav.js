@@ -17,6 +17,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Rides } from "./Rides";
 import Passengers from "./Passengers";
 import TermsAndConditions from "./TermsAndConditions";
+import Profile from "./Profile";
 
 function Setting() {
   return (
@@ -101,12 +102,6 @@ function CustomDrawerContent(props) {
           onPress={() => alert("Link to help")}
         />
       </DrawerContentScrollView>
-      <DrawerItem
-        icon={({ size, color }) => (
-          <Icon name="information-outline" color={color} size={size} />
-        )}
-        label="About Us"
-      />
 
       <DrawerItem
         icon={({ size, color }) => (
@@ -179,6 +174,15 @@ function MyDrawer() {
         }}
       />
       <Drawer.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Icon name="account-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
         name="Setting"
         component={Setting}
         options={{
@@ -222,7 +226,7 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 18,
-    // marginTop: 10,
+    marginTop: 10,
     fontWeight: "bold",
   },
   userEmail: {

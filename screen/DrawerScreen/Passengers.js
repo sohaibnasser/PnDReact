@@ -6,7 +6,7 @@ import Icon from "../../components/Icon";
 import UserInput from "../../components/auth/UserInput";
 import Button from "../../components/auth/Button";
 
-const Passengers = () => {
+const Passengers = ({ navigation }) => {
   const [parentName, setParentName] = useState("");
   const [parentCnic, setParentCnic] = useState("");
 
@@ -30,7 +30,9 @@ const Passengers = () => {
   const selectFemaleHandler = () => {
     setGender("Female");
   };
-
+  // React.useEffect(() => {
+  //   console.log("focused");
+  // }, []);
   return (
     <View style={styles.container}>
       <View>
@@ -141,12 +143,15 @@ const Passengers = () => {
             keyboardType="phone-pad"
           />
         </View>
-        <Pressable style={styles.addMorePassengerContainer}>
-          <Pressable style={({ pressed }) => pressed && styles.pressed}>
+        <View style={styles.addMorePassengerContainer}>
+          <Pressable
+            onPress={() => navigation.navigate("Add Passengers")}
+            style={({ pressed }) => pressed && styles.pressed}
+          >
             <Icon name="plus-box" color="#3696f9" size={33} />
           </Pressable>
           <Text style={styles.addMorePassenger}>Add More Passenger</Text>
-        </Pressable>
+        </View>
       </View>
       <View>
         <Pressable
@@ -217,7 +222,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   bgColor: {
-    backgroundColor: "#fff",
+    // backgroundColor: bgColor,
     width: "40%",
     height: "50%",
     borderRadius: 4,

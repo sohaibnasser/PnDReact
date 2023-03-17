@@ -14,9 +14,9 @@ import React, { useState, useContext, useEffect } from "react";
 import * as Device from "expo-device";
 // import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import UserInput from "../components/auth/UserInput";
-import Button from "../components/auth/Button";
-import Icon from "../components/Icon";
+import UserInput from "../../components/auth/UserInput";
+import Button from "../../components/auth/Button";
+import Icon from "../../components/Icon";
 // import CountryCodePicker from "../components/auth/CountryCodePicker";
 // import axios from "axios";
 // import UploadImage from "../components/auth/UploadImage";
@@ -24,28 +24,28 @@ import Icon from "../components/Icon";
 // // import DeviceInfo from "react-native-device-info";
 import * as ImagePicker from "expo-image-picker";
 
-import { API } from "../config";
-import { UUid } from "../Util/UUid";
-import Activityindicator from "../components/Activityindicator";
+import { API } from "../../config";
+import { UUid } from "../../Util/UUid";
+import Activityindicator from "../../components/Activityindicator";
 
 const CreateUser = ({ navigation }) => {
-  const [parentAddress, setParentAddress] = useState("asad");
-  const [parentAge, setParentAge] = useState("11");
-  const [parentCnic, setParentCnic] = useState("1234567");
-  const [parentContact, setParentContact] = useState("2222222");
-  const [parentEmail, setParentEmail] = useState("asad@gmail.com");
-  // const [parentGender, setParentGender] = useState(radioButtonsData);
+  const [address, setAddress] = useState("");
+  const [age, setAge] = useState("");
+  const [cnic, setCnic] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  // const [Gender, setGender] = useState(radioButtonsData);
 
   // const [radioButtons, setRadioButtons] = useState(radioButtonsData);
-  const [parentName, setParentName] = useState("asad");
-  const [parentOtherContact, setParentOtherContact] = useState("1234567");
-  const [parentPassword, setParentPassword] = useState("123456");
-  const [confirmPass, setConfirmPass] = useState("123456");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [country, setCountry] = useState("");
   const [state, setState] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState("");
-  const [parentGender, setParentGender] = useState("");
-  console.log("parent gneder", parentGender);
+  const [gender, setGender] = useState("");
+  console.log(" gneder", gender);
 
   const genderOptions = [
     { label: "Select Gender", value: "" },
@@ -54,7 +54,6 @@ const CreateUser = ({ navigation }) => {
     { label: "Non-Binary", value: "non-binary" },
     { label: "Prefer Not to Say", value: "not-specified" },
   ];
-  const parentDeviceOs = Device.osName;
 
   const [imageUrl, setImageUrl] = React.useState("");
 
@@ -85,11 +84,6 @@ const CreateUser = ({ navigation }) => {
       const responseData = await response.json();
       const resData = responseData.result;
       setState(resData);
-      // if (response.ok) {
-      //   //   const responseData = await response.json();
-      //   //   const data = responseData.result;
-      // } else {
-      // }
     } catch (error) {
       console.log(error);
     }
@@ -99,27 +93,18 @@ const CreateUser = ({ navigation }) => {
   }, []);
 
   const handleSubmit = async () => {
-    if (
-      !parentCnic ||
-      !parentName ||
-      !parentAge ||
-      !parentAddress ||
-      !parentOtherContact ||
-      !parentEmail ||
-      !parentPassword ||
-      !parentContact
-    ) {
+    if (!cnic || !name || !age || !address || !email || !password || !contact) {
       alert("all field are required");
       setIsLoading(false);
       return;
     }
-    if (parentPassword != confirmPass) {
+    if (password != confirmPass) {
       alert("password does not match");
       return;
     }
     try {
       setIsLoading(true);
-      const response = await fetch(`${API}/parent_signup`, {
+      const response = await fetch(``, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,17 +112,13 @@ const CreateUser = ({ navigation }) => {
         body: JSON.stringify({
           packageDto: { packageId: selectedPackage },
           imageUrl,
-          parentDeviceUuid: UUid,
-          parentDeviceToken: UUid,
-          parentName,
-          parentAddress,
-          parentAge,
-          parentGender,
-          parentOtherContact,
-          parentCnic,
-          parentEmail,
-          parentPassword,
-          parentDeviceOs,
+          name,
+          address,
+          age,
+          gender,
+          cnic,
+          email,
+          password,
         }),
       });
       const responseData = await response.json();
@@ -148,14 +129,10 @@ const CreateUser = ({ navigation }) => {
       } else {
         const otp = responseData.result.otp;
         console.log(otp);
-        const email = responseData.result.parentEmail;
-        const password = responseData.result.parentPassword;
-        console.log("email", email);
-        await AsyncStorage.setItem(
-          "@auth",
-          JSON.stringify({ email, password })
-        );
-        navigation.navigate("Verification", {
+        const email = responseData.result.Email;
+        const password = responseData.result.Password;
+
+        navigation.navigate("", {
           otp,
           email,
           password,
@@ -168,14 +145,6 @@ const CreateUser = ({ navigation }) => {
       // alert("error while sign in");
       setIsLoading(false);
     }
-    const PressHandler = async () => {
-      let data = await AsyncStorage.getItem("@auth");
-      //   navigation.navigate("Phone Verification");
-      console.log("loadfromAsyncsStorage", data);
-
-      // };
-    };
-    PressHandler();
   };
 
   return (
@@ -211,9 +180,9 @@ const CreateUser = ({ navigation }) => {
                   }}
                 >
                   {/* <Image
-                      source={require("../assets/profile.svg")}
-                      style={{ width: 5, height: 5 }}
-                    /> */}
+                        source={require("../assets/profile.svg")}
+                        style={{ width: 5, height: 5 }}
+                      /> */}
                   <Icon name="camera" size={30} />
                 </View>
                 // <View
@@ -241,8 +210,8 @@ const CreateUser = ({ navigation }) => {
                 placeholder="Name"
                 autoCapitalize="words"
                 autoCorrect={false}
-                value={parentName}
-                setValue={setParentName}
+                value={name}
+                setValue={setName}
               />
             </View>
           </View>
@@ -251,8 +220,8 @@ const CreateUser = ({ navigation }) => {
             <UserInput
               placeholder="phone"
               autoCorrect={false}
-              value={parentContact}
-              setValue={setParentContact}
+              value={contact}
+              setValue={setContact}
               keyboardType="phone-pad"
             />
           </View>
@@ -262,16 +231,16 @@ const CreateUser = ({ navigation }) => {
               placeholder="Email Address"
               keyboardType="email-address"
               autoCorrect={false}
-              value={parentEmail}
-              setValue={setParentEmail}
+              value={email}
+              setValue={setEmail}
             />
           </View>
           {/* gender */}
           <View style={[styles.dropDown, styles.nameInput]}>
             <View>
               <Picker
-                selectedValue={parentGender}
-                onValueChange={(itemValue) => setParentGender(itemValue)}
+                selectedValue={gender}
+                onValueChange={(itemValue) => setGender(itemValue)}
               >
                 {genderOptions.map((option) => (
                   <Picker.Item
@@ -286,8 +255,8 @@ const CreateUser = ({ navigation }) => {
           <View style={[styles.input__icon, styles.paddingVertical]}>
             <Icon name="location-enter" size={30} color="gray" />
             <UserInput
-              value={parentAddress}
-              setValue={setParentAddress}
+              value={address}
+              setValue={setAddress}
               autoCorrect={false}
               autoCapitalize="none"
               placeholder="Address"
@@ -296,8 +265,8 @@ const CreateUser = ({ navigation }) => {
           <View style={[styles.input__icon, styles.paddingVertical]}>
             <Icon name="human-male" size={30} color="gray" />
             <UserInput
-              value={parentAge}
-              setValue={setParentAge}
+              value={age}
+              setValue={setAge}
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="number-pad"
@@ -309,28 +278,28 @@ const CreateUser = ({ navigation }) => {
             <UserInput
               placeholder="CNIC No._ _ _ _ _  _ _ _ _ _ _ _  _"
               autoCorrect={false}
-              value={parentCnic}
-              setValue={setParentCnic}
+              value={cnic}
+              setValue={setCnic}
               keyboardType="number-pad"
             />
           </View>
 
           {/* gender */}
           {/* <RadioGroup
-          radioButtons={parentGender}
-          onPress={onPressRadioButton}
-          layout="row"
-        /> */}
+            radioButtons={Gender}
+            onPress={onPressRadioButton}
+            layout="row"
+          /> */}
 
           <View style={[styles.input__icon, styles.paddingVertical]}>
             <Icon name="account-outline" size={30} color="gray" />
             <UserInput
-              placeholder="otherContact"
+              placeholder="Country"
               // autoCapitalize="number-pad"
               autoCorrect={false}
-              value={parentOtherContact}
-              setValue={setParentOtherContact}
-              keyboardType="phone-pad"
+              value={country}
+              setValue={setCountry}
+              //   keyboardType="phone-pad"
             />
           </View>
 
@@ -339,8 +308,8 @@ const CreateUser = ({ navigation }) => {
             <UserInput
               placeholder="Password"
               secureTextEntry={true}
-              value={parentPassword}
-              setValue={setParentPassword}
+              value={password}
+              setValue={setPassword}
             />
           </View>
           <View style={[styles.input__icon, styles.paddingVertical]}>
@@ -372,31 +341,15 @@ const CreateUser = ({ navigation }) => {
             </View>
           </View>
 
-          <View>
-            <Text style={styles.termsAndconditions}>
-              By creating account, you agree to our{" "}
-              <Text style={{ color: "#49bece" }}>terms of services</Text>
-            </Text>
-          </View>
-          <Pressable
+          {/* button */}
+          {/* <Pressable
             style={({ pressed }) => pressed && styles.pressed}
             onPress={handleSubmit}
           >
             <Button>
               <Text>CONTINUE</Text>
             </Button>
-          </Pressable>
-
-          <View style={styles.createAccount}>
-            <Text>Already have account.</Text>
-
-            <Pressable
-              style={({ pressed }) => pressed && styles.pressed}
-              onPress={() => navigation.navigate("SignIn")}
-            >
-              <Text style={styles.createAccount__text}>Sign In</Text>
-            </Pressable>
-          </View>
+          </Pressable> */}
         </ScrollView>
       </SafeAreaView>
     </>
