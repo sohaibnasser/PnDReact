@@ -1,45 +1,38 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
-export const Tabbar = () => {
+export const Tabbar = ({ title, handlePress, color }) => {
   return (
-    <View style={styles.container}>
-      <Pressable
-        style={({ pressed }) => [
-          pressed && styles.pressed,
-          styles.tabContainer,
-        ]}
-      >
-        <Text>Schedule</Text>
-      </Pressable>
-      <Pressable
-        style={({ pressed }) => [
-          pressed && styles.pressed,
-          styles.tabContainer,
-        ]}
-      >
-        <Text>History</Text>
-      </Pressable>
-    </View>
+    <Pressable
+      onPress={handlePress}
+      style={({ pressed }) => [
+        pressed && styles.pressed,
+        styles.tabContainer,
+        color,
+      ]}
+    >
+      <Text style={{ fontWeight: "bold" }}>{title}</Text>
+    </Pressable>
   );
 };
 const styles = StyleSheet.create({
-  container: {
+  pressed: {
+    opacity: 0.7,
+  },
+  tabContainer: {
+    maxWidth: "100%",
+    width: 100,
+
+    height: 28,
+    justifyContent: "center",
+
+    alignItems: "center",
+  },
+  tabbar: {
     // padding: 16,
     flexDirection: "row",
     justifyContent: "space-around",
     backgroundColor: "#3696f9",
     height: 45,
-    borderRadius: 4,
-    alignItems: "center",
-  },
-  pressed: {
-    opacity: 0.7,
-  },
-  tabContainer: {
-    width: "46%",
-    backgroundColor: "#fff",
-    height: 28,
-    justifyContent: "center",
     borderRadius: 4,
     alignItems: "center",
   },
