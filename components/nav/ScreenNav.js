@@ -15,6 +15,8 @@ import DrawerNav from "../../screen/DrawerScreen/DrawerNav";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddPassenger from "../../screen/AddPassenger";
+import Notification from "../../screen/Notification";
+import ServiceProviderDetails from "../../screen/ServiceProviderDetails";
 // import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Stack = createNativeStackNavigator();
@@ -67,6 +69,16 @@ const ScreenNav = () => {
         name="Add Passengers"
         component={AddPassenger}
         // options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        // options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Notification" component={Notification} />
+      <Stack.Screen
+        name="Service Provider Details"
+        component={ServiceProviderDetails}
       />
     </Stack.Navigator>
   );

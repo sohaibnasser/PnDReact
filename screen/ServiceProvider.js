@@ -1,22 +1,29 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+} from "react-native";
 import React, { useContext } from "react";
 import Icon from "../components/Icon";
-import Button from "../components/auth/Button";
+
 import { API } from "../config";
 import { AuthContext } from "../store/store";
 
 const data = [
-  { id: 1, name: "asad", contact: "1123203333", RatingStar: "1" },
-  { id: 2, name: "asad", contact: "1123203333", RatingStar: "4" },
-  { id: 3, name: "asad", contact: "1123203333", RatingStar: "1" },
-  { id: 4, name: "asad", contact: "1123203333", RatingStar: "4" },
-  { id: 5, name: "asad", contact: "1123203333", RatingStar: "1" },
-  { id: 6, name: "asad", contact: "1123203333", RatingStar: "3" },
-  { id: 7, name: "asad", contact: "1123203333", RatingStar: "5" },
-  { id: 8, name: "asad", contact: "1123203333", RatingStar: "5" },
+  { id: 1, name: "Asad Ullah", contact: "1123203333", RatingStar: "***" },
+  { id: 2, name: "Asad Ullah", contact: "1123203333", RatingStar: "****" },
+  { id: 3, name: "Asad Ullah", contact: "1123203333", RatingStar: "*****" },
+  { id: 4, name: "Asad Ullah", contact: "1123203333", RatingStar: "***" },
+  { id: 5, name: "Asad Ullah", contact: "1123203333", RatingStar: "***" },
+  { id: 6, name: "Asad Ullah", contact: "1123203333", RatingStar: "***" },
+  { id: 7, name: "Asad Ullah", contact: "1123203333", RatingStar: "***" },
+  { id: 8, name: "Asad Ullah", contact: "1123203333", RatingStar: "*****" },
 ];
 
-const ServiceProvider = () => {
+const ServiceProvider = ({ navigation }) => {
   const [state, setState] = useContext(AuthContext);
   // async function getUserData() {
   //   const response = await fetch(`${API}/profile/6`, {
@@ -60,32 +67,34 @@ const ServiceProvider = () => {
         data={data}
         key={(item) => item.id}
         numColumns={2}
-        renderItem={(item) => (
-          <Pressable
-            style={({ pressed }) => [
-              pressed && styles.pressed,
-              styles.services,
-            ]}
-          >
-            <View>
-              <Text style={styles.ServiceProviderColor}>
+        renderItem={(item, index) => {
+          return (
+            <Pressable
+              onPress={() =>
+                navigation.navigate("Service Provider Details", {
+                  itemId: item.item.id,
+                })
+              }
+              style={({ pressed }) => [
+                pressed && styles.pressed,
+                styles.services,
+                { padding: 10 },
+              ]}
+            >
+              <View>
+                <Text style={styles.ServiceProviderName}>{item.item.name}</Text>
+              </View>
+              <Text style={styles.ServiceProviderName}>
                 {" "}
-                Name:{item.item.name}
+                Contact:{item.item.contact}
               </Text>
-              <Text style={styles.ServiceProviderColor}>
-                {JSON.stringify(state, null, 4)}
+              {/* <Text>{item.Type}</Text> */}
+              <Text style={styles.ServiceProviderName}>
+                Rating:{item.item.RatingStar}
               </Text>
-              {/* <Icon name="email" color="#fff" size={40} /> */}
-            </View>
-            <Text style={styles.ServiceProviderColor}>
-              Contact:{item.item.contact}
-            </Text>
-            {/* <Text>{item.Type}</Text> */}
-            <Text style={styles.ServiceProviderColor}>
-              Rating:{item.item.RatingStar}
-            </Text>
-          </Pressable>
-        )}
+            </Pressable>
+          );
+        }}
       />
     </View>
   );
@@ -105,7 +114,7 @@ const styles = StyleSheet.create({
     maxWidth: "100%",
     width: 150,
     maxHeight: "100%",
-    height: 120,
+    height: 150,
     backgroundColor: "#55cd85",
     margin: 3,
     // borderRadius: 4,
@@ -127,7 +136,9 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.7,
   },
-  ServiceProviderColor: {
-    // color: "",
+  ServiceProviderName: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });

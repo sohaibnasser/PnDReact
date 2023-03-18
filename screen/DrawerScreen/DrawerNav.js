@@ -18,19 +18,12 @@ import { Rides } from "./Rides";
 import Passengers from "./Passengers";
 import TermsAndConditions from "./TermsAndConditions";
 import Profile from "./Profile";
+import Notification from "../Notification";
 
 function Setting() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>Setting Screen</Text>
-    </View>
-  );
-}
-
-function Notification() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Notification Screen</Text>
     </View>
   );
 }
