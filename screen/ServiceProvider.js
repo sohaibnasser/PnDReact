@@ -13,14 +13,62 @@ import { API } from "../config";
 import { AuthContext } from "../store/store";
 
 const data = [
-  { id: 1, name: "Asad Ullah", contact: "1123203333", RatingStar: "***" },
-  { id: 2, name: "Asad Ullah", contact: "1123203333", RatingStar: "****" },
-  { id: 3, name: "Asad Ullah", contact: "1123203333", RatingStar: "*****" },
-  { id: 4, name: "Asad Ullah", contact: "1123203333", RatingStar: "***" },
-  { id: 5, name: "Asad Ullah", contact: "1123203333", RatingStar: "***" },
-  { id: 6, name: "Asad Ullah", contact: "1123203333", RatingStar: "***" },
-  { id: 7, name: "Asad Ullah", contact: "1123203333", RatingStar: "***" },
-  { id: 8, name: "Asad Ullah", contact: "1123203333", RatingStar: "*****" },
+  {
+    id: 1,
+    name: "Irfan Ali",
+    contact: "1123203333",
+    ServiceProvider1: "Service Provider 1",
+    RatingStar: "***",
+  },
+  {
+    id: 2,
+    name: "Muddasir Khan",
+    contact: "1123203333",
+    ServiceProvider1: "Service Provider 2",
+    RatingStar: "****",
+  },
+  {
+    id: 3,
+    name: "M Afnan",
+    contact: "1123203333",
+    ServiceProvider1: "Service Provider 3",
+    RatingStar: "*****",
+  },
+  {
+    id: 4,
+    name: "Adnan Khan",
+    contact: "1123203333",
+    ServiceProvider1: "Service Provider 4",
+    RatingStar: "***",
+  },
+  {
+    id: 5,
+    name: "Asad Khan",
+    contact: "1123203333",
+    ServiceProvider1: "Service Provider 5",
+    RatingStar: "***",
+  },
+  {
+    id: 6,
+    name: "Muhammed ali",
+    contact: "1123203333",
+    ServiceProvider1: "Service Provider 6",
+    RatingStar: "***",
+  },
+  {
+    id: 7,
+    name: "Khan",
+    contact: "1123203333",
+    ServiceProvider1: "Service Provider 7",
+    RatingStar: "***",
+  },
+  {
+    id: 8,
+    name: "Asad Ullah",
+    contact: "1123203333",
+    ServiceProvider1: "Service Provider 8",
+    RatingStar: "*****",
+  },
 ];
 
 const ServiceProvider = ({ navigation }) => {
@@ -67,12 +115,13 @@ const ServiceProvider = ({ navigation }) => {
         data={data}
         key={(item) => item.id}
         numColumns={2}
-        renderItem={(item, index) => {
+        renderItem={(item) => {
           return (
             <Pressable
               onPress={() =>
                 navigation.navigate("Service Provider Details", {
                   itemId: item.item.id,
+                  name: item.item.ServiceProvider1,
                 })
               }
               style={({ pressed }) => [
@@ -104,11 +153,13 @@ export default ServiceProvider;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    // padding: 8,
     flex: 1,
-    alignItems: "center",
     paddingVertical: 3,
     backgroundColor: "#ffffff",
+    alignItems: "center",
+    justifyContent: "center",
+    // padding: 10,
+    // maxWidth: "100%",
   },
   services: {
     maxWidth: "100%",

@@ -108,8 +108,8 @@ const AddPassenger = ({ navigation }) => {
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <Activityindicator isLoading={isLoading} />
         <ScrollView showsVerticalScrollIndicator={false}>
+          <Activityindicator isLoading={isLoading} />
           <View
             style={{
               flexDirection: "row",

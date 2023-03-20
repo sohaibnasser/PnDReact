@@ -19,14 +19,8 @@ import Passengers from "./Passengers";
 import TermsAndConditions from "./TermsAndConditions";
 import Profile from "./Profile";
 import Notification from "../Notification";
-
-function Setting() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Setting Screen</Text>
-    </View>
-  );
-}
+import Setting from "../Setting";
+import Complains from "./Complains";
 
 function CustomDrawerContent(props) {
   const [state, setState] = useContext(AuthContext);
@@ -154,6 +148,15 @@ function MyDrawer() {
         options={{
           drawerIcon: ({ color, size }) => (
             <Icon name="car-3-plus" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Complains"
+        component={Complains}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Icon name="emoticon-sad-outline" size={size} color={color} />
           ),
         }}
       />
