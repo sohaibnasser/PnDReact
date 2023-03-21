@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   tabContainer: {
     maxWidth: "100%",
-    width: 100,
+    width: 70,
 
     height: 28,
     justifyContent: "center",

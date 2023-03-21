@@ -79,11 +79,13 @@ function UserProfile() {
 
         <View style={{ marginLeft: 15 }}>
           <Text style={styles.userName}>{para.parentName}</Text>
-          <Text>rating:{para.parentRating}</Text>
+
           {/* <Text>sttae{state.result.parentName}</Text> */}
 
           <Text style={styles.userEmail}>{para.parentEmail}</Text>
-          <Text style={styles.userEmail}>{para.packageName}</Text>
+
+          <Text style={styles.userEmail}>{para.packageName} </Text>
+          <Text>rating:{para.parentRating}</Text>
         </View>
       </View>
       {/* <DrawerContentScrollView {...props}> */}

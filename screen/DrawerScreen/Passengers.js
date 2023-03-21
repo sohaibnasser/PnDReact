@@ -5,12 +5,14 @@ import Activityindicator from "../../components/Activityindicator";
 import Icon from "../../components/Icon";
 import UserInput from "../../components/auth/UserInput";
 import Button from "../../components/auth/Button";
+import { Ionicons } from "@expo/vector-icons";
 
 const Passengers = ({ navigation }) => {
   const [parentName, setParentName] = useState("");
   const [parentCnic, setParentCnic] = useState("");
 
   const [parentContact, setParentContact] = useState("");
+  const [parentEmail, setParentEmail] = useState("");
 
   const [age, setAge] = useState(5);
   const [gender, setGender] = useState("");
@@ -33,6 +35,27 @@ const Passengers = ({ navigation }) => {
   // React.useEffect(() => {
   //   console.log("focused");
   // }, []);
+  navigation.setOptions({
+    headerLeft: () => (
+      <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
+        <Ionicons name="arrow-back-outline" size={24} color="white" />
+      </Pressable>
+    ),
+    headerRight: () => (
+      <Pressable
+        onPress={() => navigation.navigate("Add Passengers")}
+        style={({ pressed }) => [
+          pressed && styles.pressed,
+          styles.headerRightButton,
+        ]}
+      >
+        <Icon name="plus-box" color="#3696f9" size={33} />
+      </Pressable>
+      // <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
+      //   <Ionicons name="arrow-back-outline" size={24} color="white" />
+      // </Pressable>
+    ),
+  });
   return (
     <View style={styles.container}>
       <View>
@@ -134,6 +157,16 @@ const Passengers = ({ navigation }) => {
           />
         </View>
         <View style={[styles.input__icon, styles.paddingVertical]}>
+          <Icon name="email" size={30} color="gray" />
+          <UserInput
+            placeholder="Email Address"
+            keyboardType="email-address"
+            autoCorrect={false}
+            value={parentEmail}
+            setValue={setParentEmail}
+          />
+        </View>
+        <View style={[styles.input__icon, styles.paddingVertical]}>
           <Icon name="cellphone" size={30} color="gray" />
           <UserInput
             placeholder="phone"
@@ -173,6 +206,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     justifyContent: "space-between",
+  },
+  headerRightButton: {
+    // alignSelf: "center",
+    justifyContent: "center",
+    paddingHorizontal: 10,
+    // marginTop: 10,
   },
   input__icon: {
     flexDirection: "row",

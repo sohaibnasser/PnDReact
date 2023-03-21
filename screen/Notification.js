@@ -3,8 +3,16 @@ import React from "react";
 import Icon from "../components/Icon";
 import { Tabbar } from "../components/auth/Tabbar";
 import { Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-const Notification = () => {
+const Notification = ({ navigation }) => {
+  navigation.setOptions({
+    headerLeft: () => (
+      <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
+        <Ionicons name="arrow-back-outline" size={24} color="white" />
+      </Pressable>
+    ),
+  });
   const [activeTab, setActiveTab] = React.useState("tab1");
   const tab1Styles =
     activeTab === "tab1" ? styles.activeTab : styles.inactiveTab;

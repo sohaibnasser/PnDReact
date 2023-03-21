@@ -108,8 +108,8 @@ const AddPassenger = ({ navigation }) => {
   return (
     <>
       <SafeAreaView style={styles.container}>
+        <Activityindicator isLoading={isLoading} />
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Activityindicator isLoading={isLoading} />
           <View
             style={{
               flexDirection: "row",
@@ -211,7 +211,7 @@ const AddPassenger = ({ navigation }) => {
           <View style={[styles.input__icon, styles.paddingVertical]}>
             <Icon name="cellphone" size={30} color="gray" />
             <UserInput
-              placeholder="phone"
+              placeholder="Phone No"
               autoCorrect={false}
               value={contact}
               setValue={setContact}

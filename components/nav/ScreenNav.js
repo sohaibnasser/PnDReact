@@ -5,7 +5,7 @@ import CreateUser from "../../screen/CreateUser";
 import PhoneVerification from "../../screen/PhoneVerification";
 import ForgotPassword from "../../screen/ForgotPassword";
 import Home from "../../screen/Home";
-import ServiceProvider from "../../screen/ServiceProvider";
+// import ServiceProvider from "../../screen/ServiceProvider";
 import { Provider } from "react-redux";
 import { AuthContext, AuthProvider, store } from "../../store/store.js";
 import UserProfile from "../../components/UserProfile";

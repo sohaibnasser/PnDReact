@@ -3,8 +3,16 @@ import React from "react";
 import Button from "../../components/auth/Button";
 import { Tabbar } from "../../components/auth/Tabbar";
 import Icon from "../../components/Icon";
+import { Ionicons } from "@expo/vector-icons";
 
-export const Rides = () => {
+export const Rides = ({ navigation }) => {
+  navigation.setOptions({
+    headerLeft: () => (
+      <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
+        <Ionicons name="arrow-back-outline" size={24} color="white" />
+      </Pressable>
+    ),
+  });
   const [activeTab, setActiveTab] = React.useState("tab1");
   const tab1Styles =
     activeTab === "tab1" ? styles.activeTab : styles.inactiveTab;
@@ -17,25 +25,39 @@ export const Rides = () => {
           <View style={styles.tabbar}>
             <View>
               <Tabbar
-                title="Schedule"
+                title="Today Ride"
                 handlePress={() => setActiveTab("tab1")}
                 color={tab1Styles}
               />
             </View>
             <View>
               <Tabbar
-                title="History"
+                title="Previous Ride"
+                handlePress={() => setActiveTab("tab2")}
+              />
+            </View>
+            <View>
+              <Tabbar
+                title="Future Ride"
                 handlePress={() => setActiveTab("tab2")}
               />
             </View>
           </View>
           <View style={styles.card}>
             <View style={styles.cardData}>
-              <Text style={styles.dayAndTime}>Tommorow , 7:30 PM</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={styles.dayAndTime}>Date</Text>
+                <Text style={styles.dayAndTime}> Pending</Text>
+              </View>
               <View>
                 <View style={{ flexDirection: "row" }}>
                   <Icon name="circle-outline" color="#49bece" size={15} />
-                  <Text style={styles.fromAndtoTxt}>From</Text>
+                  <Text style={styles.fromAndtoTxt}>Pick Up</Text>
                 </View>
                 <View
                   style={{
@@ -47,12 +69,13 @@ export const Rides = () => {
                   }}
                 >
                   <Text style={styles.FromAndToPlace}>I-8/4 Islamabad</Text>
+                  <Text style={styles.dayAndTime}>7:30 am</Text>
                 </View>
               </View>
               <View>
                 <View style={{ flexDirection: "row", paddingTop: 10 }}>
                   <Icon name="circle-outline" color="green" size={15} />
-                  <Text style={styles.fromAndtoTxt}>To</Text>
+                  <Text style={styles.fromAndtoTxt}>Drop Off</Text>
                 </View>
                 <View
                   style={{
@@ -63,7 +86,7 @@ export const Rides = () => {
                   }}
                 >
                   <Text style={styles.FromAndToPlace}>I-8/4 Islamabad</Text>
-                  <Icon name="pencil" />
+                  <Text style={styles.dayAndTime}>2:30 pm</Text>
                 </View>
               </View>
             </View>
@@ -79,25 +102,39 @@ export const Rides = () => {
           <View style={styles.tabbar}>
             <View>
               <Tabbar
-                title="Schedule"
+                title="Today Ride"
                 handlePress={() => setActiveTab("tab1")}
               />
             </View>
             <View>
               <Tabbar
-                title="History"
+                title="Previous Ride"
                 handlePress={() => setActiveTab("tab2")}
                 color={tab2Styles}
+              />
+            </View>
+            <View>
+              <Tabbar
+                title="Future Ride"
+                handlePress={() => setActiveTab("tab2")}
               />
             </View>
           </View>
           <View style={styles.card}>
             <View style={styles.cardData}>
-              <Text style={styles.dayAndTime}>Saturday , 7:30 PM</Text>
+              <View
+                style={{
+                  justifyContent: "space-between",
+                  flexDirection: "row",
+                }}
+              >
+                <Text style={styles.dayAndTime}>Saturday</Text>
+                <Text style={styles.dayAndTime}>Completed</Text>
+              </View>
               <View>
                 <View style={{ flexDirection: "row" }}>
                   <Icon name="circle-outline" color="#49bece" size={15} />
-                  <Text style={styles.fromAndtoTxt}>From</Text>
+                  <Text style={styles.fromAndtoTxt}>Pick Up</Text>
                 </View>
                 <View
                   style={{
@@ -112,25 +149,36 @@ export const Rides = () => {
               <View>
                 <View style={{ flexDirection: "row", paddingTop: 10 }}>
                   <Icon name="circle-outline" color="green" size={15} />
-                  <Text style={styles.fromAndtoTxt}>To</Text>
+                  <Text style={styles.fromAndtoTxt}>Drop Off</Text>
                 </View>
                 <View
                   style={{
                     borderBottomColor: "gray",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
                   }}
                 >
                   <Text style={styles.FromAndToPlace}>NUML H9-Islamabad</Text>
+                  <Text style={styles.dayAndTime}>8: 00 am</Text>
                 </View>
               </View>
             </View>
           </View>
           <View style={styles.card}>
             <View style={styles.cardData}>
-              <Text style={styles.dayAndTime}>Friday , 7:30 PM</Text>
+              <View
+                style={{
+                  justifyContent: "space-between",
+                  flexDirection: "row",
+                }}
+              >
+                <Text style={styles.dayAndTime}>Friday</Text>
+                <Text style={styles.dayAndTime}>Completed</Text>
+              </View>
               <View>
                 <View style={{ flexDirection: "row" }}>
                   <Icon name="circle-outline" color="#49bece" size={15} />
-                  <Text style={styles.fromAndtoTxt}>From</Text>
+                  <Text style={styles.fromAndtoTxt}>Pick Up</Text>
                 </View>
                 <View
                   style={{
@@ -145,14 +193,17 @@ export const Rides = () => {
               <View>
                 <View style={{ flexDirection: "row", paddingTop: 10 }}>
                   <Icon name="circle-outline" color="green" size={15} />
-                  <Text style={styles.fromAndtoTxt}>To</Text>
+                  <Text style={styles.fromAndtoTxt}>Drop Off</Text>
                 </View>
                 <View
                   style={{
                     borderBottomColor: "gray",
+                    justifyContent: "space-between",
+                    flexDirection: "row",
                   }}
                 >
                   <Text style={styles.FromAndToPlace}>I-8/4 Islamabad</Text>
+                  <Text style={styles.dayAndTime}>8: 00 am</Text>
                 </View>
               </View>
             </View>

@@ -7,7 +7,7 @@ import {
   DrawerItem,
 } from "@react-navigation/drawer";
 import { SimpleLineIcons } from "@expo/vector-icons";
-import ServiceProvider from "../ServiceProvider";
+import Dashboard from "../Dashboard";
 import UserProfile from "../../components/UserProfile";
 import { API } from "../../config";
 import Icon from "../../components/Icon";
@@ -113,7 +113,7 @@ const Drawer = createDrawerNavigator();
 function MyDrawer() {
   return (
     <Drawer.Navigator
-      initialRouteName="Service Provider"
+      initialRouteName="Dashboard"
       screenOptions={{
         drawerStyle: {
           backgroundColor: "#ffffff",
@@ -134,8 +134,8 @@ function MyDrawer() {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen
-        name="Service Provider"
-        component={ServiceProvider}
+        name="Dashboard"
+        component={Dashboard}
         options={{
           drawerIcon: ({ color, size }) => (
             <Icon name="car-multiple" size={size} color={color} />
@@ -183,7 +183,8 @@ function MyDrawer() {
         component={Setting}
         options={{
           drawerIcon: ({ color, size }) => (
-            <SimpleLineIcons name="settings" size={size} color={color} />
+            // <SimpleLineIcons name="settings" size={size} color={color} />
+            <Icon name="account-cog-outline" size={size} color={color} />
           ),
         }}
       />

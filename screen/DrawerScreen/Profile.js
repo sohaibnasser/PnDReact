@@ -27,8 +27,16 @@ import * as ImagePicker from "expo-image-picker";
 import { API } from "../../config";
 import { UUid } from "../../Util/UUid";
 import Activityindicator from "../../components/Activityindicator";
+import { Ionicons } from "@expo/vector-icons";
 
 const CreateUser = ({ navigation }) => {
+  navigation.setOptions({
+    headerLeft: () => (
+      <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
+        <Ionicons name="arrow-back-outline" size={24} color="white" />
+      </Pressable>
+    ),
+  });
   const [address, setAddress] = useState("");
   const [age, setAge] = useState("");
   const [cnic, setCnic] = useState("");
