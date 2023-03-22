@@ -6,19 +6,26 @@ import Icon from "../../components/Icon";
 import { Ionicons } from "@expo/vector-icons";
 
 export const Rides = ({ navigation }) => {
-  navigation.setOptions({
-    headerLeft: () => (
-      <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back-outline" size={24} color="white" />
-      </Pressable>
-    ),
-  });
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.navigate("Dashboard")}
+        >
+          <Ionicons name="arrow-back-outline" size={24} color="white" />
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
   const [activeTab, setActiveTab] = React.useState("tab1");
   const tab1Styles =
     activeTab === "tab1" ? styles.activeTab : styles.inactiveTab;
   const tab2Styles =
     activeTab === "tab2" ? styles.activeTab : styles.inactiveTab;
-  function Schedule() {
+  const tab3Styles =
+    activeTab === "tab3" ? styles.activeTab : styles.inactiveTab;
+  function Today() {
     return (
       <View style={styles.container}>
         <View>
@@ -39,7 +46,7 @@ export const Rides = ({ navigation }) => {
             <View>
               <Tabbar
                 title="Future Ride"
-                handlePress={() => setActiveTab("tab2")}
+                handlePress={() => setActiveTab("tab3")}
               />
             </View>
           </View>
@@ -51,7 +58,7 @@ export const Rides = ({ navigation }) => {
                   justifyContent: "space-between",
                 }}
               >
-                <Text style={styles.dayAndTime}>Date</Text>
+                <Text style={styles.dayAndTime}>Monday</Text>
                 <Text style={styles.dayAndTime}> Pending</Text>
               </View>
               <View>
@@ -95,7 +102,7 @@ export const Rides = ({ navigation }) => {
       </View>
     );
   }
-  function History() {
+  function Previous() {
     return (
       <View style={styles.container}>
         <View>
@@ -116,11 +123,13 @@ export const Rides = ({ navigation }) => {
             <View>
               <Tabbar
                 title="Future Ride"
-                handlePress={() => setActiveTab("tab2")}
+                handlePress={() => setActiveTab("tab3")}
               />
             </View>
           </View>
-          <View style={styles.card}>
+          <View
+            style={[styles.card, { backgroundColor: "rgba(54, 150, 249,0.9)" }]}
+          >
             <View style={styles.cardData}>
               <View
                 style={{
@@ -128,8 +137,128 @@ export const Rides = ({ navigation }) => {
                   flexDirection: "row",
                 }}
               >
-                <Text style={styles.dayAndTime}>Saturday</Text>
-                <Text style={styles.dayAndTime}>Completed</Text>
+                <Text style={styles.dayAndTimePrevious}>Saturday</Text>
+                <Text style={styles.dayAndTimePrevious}>Completed</Text>
+              </View>
+              <View>
+                <View style={{ flexDirection: "row" }}>
+                  <Icon name="circle-outline" color="#49bece" size={15} />
+                  <Text style={styles.fromAndtoTxtPrevious}>Pick Up</Text>
+                </View>
+                <View
+                  style={{
+                    borderBottomWidth: 0.4,
+                    borderBottomColor: "gray",
+                    paddingBottom: 10,
+                  }}
+                >
+                  <Text style={styles.FromAndToPlace}>I-8/4 Islamabad</Text>
+                </View>
+              </View>
+              <View>
+                <View style={{ flexDirection: "row", paddingTop: 10 }}>
+                  <Icon name="circle-outline" color="green" size={15} />
+                  <Text style={styles.fromAndtoTxtPrevious}>Drop Off</Text>
+                </View>
+                <View
+                  style={{
+                    borderBottomColor: "gray",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text style={styles.FromAndToPlace}>NUML H9-Islamabad</Text>
+                  <Text style={styles.dayAndTimePrevious}>8: 00 am</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+          {/* <View style={styles.card}>
+            <View style={styles.cardData}>
+              <View
+                style={{
+                  justifyContent: "space-between",
+                  flexDirection: "row",
+                }}
+              >
+                <Text style={styles.dayAndTimePrevious}>Friday</Text>
+                <Text style={styles.dayAndTimePrevious}>Completed</Text>
+              </View>
+              <View>
+                <View style={{ flexDirection: "row" }}>
+                  <Icon name="circle-outline" color="#49bece" size={15} />
+                  <Text style={styles.fromAndtoTxt}>Pick Up</Text>
+                </View>
+                <View
+                  style={{
+                    borderBottomWidth: 0.4,
+                    borderBottomColor: "gray",
+                    paddingBottom: 10,
+                  }}
+                >
+                  <Text style={styles.FromAndToPlace}>I-8/4 Islamabad</Text>
+                </View>
+              </View>
+              <View>
+                <View style={{ flexDirection: "row", paddingTop: 10 }}>
+                  <Icon name="circle-outline" color="green" size={15} />
+                  <Text style={styles.fromAndtoTxt}>Drop Off</Text>
+                </View>
+                <View
+                  style={{
+                    borderBottomColor: "gray",
+                    justifyContent: "space-between",
+                    flexDirection: "row",
+                  }}
+                >
+                  <Text style={styles.FromAndToPlace}>I-8/4 Islamabad</Text>
+                  <Text style={styles.dayAndTimePrevious}>8: 00 am</Text>
+                </View>
+              </View>
+            </View>
+          </View> */}
+        </View>
+      </View>
+    );
+  }
+  function Future() {
+    return (
+      <View style={styles.container}>
+        <View>
+          <View style={styles.tabbar}>
+            <View>
+              <Tabbar
+                title="Today Ride"
+                handlePress={() => setActiveTab("tab1")}
+              />
+            </View>
+            <View>
+              <Tabbar
+                title="Previous Ride"
+                handlePress={() => setActiveTab("tab2")}
+                color={tab2Styles}
+              />
+            </View>
+            <View>
+              <Tabbar
+                title="Future Ride"
+                handlePress={() => setActiveTab("tab3")}
+                color={tab3Styles}
+              />
+            </View>
+          </View>
+          <View
+            style={[styles.card, { backgroundColor: "rgba(85, 205, 133,0.9)" }]}
+          >
+            <View style={styles.cardData}>
+              <View
+                style={{
+                  justifyContent: "space-between",
+                  flexDirection: "row",
+                }}
+              >
+                <Text style={styles.dayAndTimeFuture}>Saturday</Text>
+                <Text style={styles.dayAndTimeFuture}>Completed</Text>
               </View>
               <View>
                 <View style={{ flexDirection: "row" }}>
@@ -159,12 +288,12 @@ export const Rides = ({ navigation }) => {
                   }}
                 >
                   <Text style={styles.FromAndToPlace}>NUML H9-Islamabad</Text>
-                  <Text style={styles.dayAndTime}>8: 00 am</Text>
+                  <Text style={styles.dayAndTimeFuture}>8: 00 am</Text>
                 </View>
               </View>
             </View>
           </View>
-          <View style={styles.card}>
+          {/* <View style={[styles.card, { backgroundColor: "gray" }]}>
             <View style={styles.cardData}>
               <View
                 style={{
@@ -207,13 +336,23 @@ export const Rides = ({ navigation }) => {
                 </View>
               </View>
             </View>
-          </View>
+          </View> */}
         </View>
       </View>
     );
   }
 
-  return <View>{activeTab === "tab1" ? <Schedule /> : <History />}</View>;
+  return (
+    <View>
+      {activeTab === "tab1" ? (
+        <Today />
+      ) : activeTab === "tab2" ? (
+        <Previous />
+      ) : (
+        <Future />
+      )}
+    </View>
+  );
 };
 const styles = StyleSheet.create({
   container: {
@@ -278,6 +417,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#3696f9",
   },
+  dayAndTimePrevious: {
+    marginBottom: 8,
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "#fff",
+  },
   FromAndToPlace: {
     marginLeft: 20,
     fontWeight: "bold",
@@ -287,5 +432,16 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     color: "grey",
     fontSize: 14,
+  },
+  fromAndtoTxtPrevious: {
+    marginLeft: 5,
+    color: "#6dc691",
+    fontSize: 14,
+  },
+  dayAndTimeFuture: {
+    marginBottom: 8,
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "#fff",
   },
 });

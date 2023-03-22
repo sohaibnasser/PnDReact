@@ -3,6 +3,7 @@ import React from "react";
 import { ScrollView } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "../components/Icon";
+import { Ionicons } from "@expo/vector-icons";
 
 const data = [
   {
@@ -48,6 +49,18 @@ const data = [
 ];
 
 const Dashboard = ({ navigation }) => {
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back-outline" size={24} color="white" />
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
   return (
     <View style={styles.mainContaier}>
       <FlatList

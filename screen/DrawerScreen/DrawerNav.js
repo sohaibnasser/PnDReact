@@ -21,6 +21,8 @@ import Profile from "./Profile";
 import Notification from "../Notification";
 import Setting from "../Setting";
 import Complains from "./Complains";
+import ServiceProvider from "./ServiceProvider";
+import Leaves from "./Leaves";
 
 function CustomDrawerContent(props) {
   const [state, setState] = useContext(AuthContext);
@@ -85,8 +87,15 @@ function CustomDrawerContent(props) {
           icon={({ size, color }) => (
             <Icon name="help-circle-outline" color={color} size={size} />
           )}
-          label="Help"
-          onPress={() => alert("Link to help")}
+          label="About Us"
+          onPress={() => alert("WebView Link")}
+        />
+        <DrawerItem
+          icon={({ size, color }) => (
+            <Icon name="help-circle-outline" color={color} size={size} />
+          )}
+          label="Privacy"
+          onPress={() => alert("Link to Privacy")}
         />
       </DrawerContentScrollView>
 
@@ -113,7 +122,7 @@ const Drawer = createDrawerNavigator();
 function MyDrawer() {
   return (
     <Drawer.Navigator
-      initialRouteName="Dashboard"
+      initialRouteName="Service Provider"
       screenOptions={{
         drawerStyle: {
           backgroundColor: "#ffffff",
@@ -134,6 +143,15 @@ function MyDrawer() {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen
+        name="Service Provider"
+        component={ServiceProvider}
+        options={{
+          drawerItemStyle: {
+            display: "none",
+          },
+        }}
+      />
+      <Drawer.Screen
         name="Dashboard"
         component={Dashboard}
         options={{
@@ -142,6 +160,7 @@ function MyDrawer() {
           ),
         }}
       />
+
       <Drawer.Screen
         name="Your Ride"
         component={Rides}
@@ -197,6 +216,25 @@ function MyDrawer() {
           ),
         }}
       />
+
+      <Drawer.Screen
+        name="Leaves"
+        component={Leaves}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Icon name="map-marker-minus-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      {/* <Drawer.Screen
+        name="About Us"
+        component={TermsAndConditions}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Icon name="police-badge-outline" size={size} color={color} />
+          ),
+        }}
+      /> */}
       <Drawer.Screen
         name="Terms & Conditions"
         component={TermsAndConditions}

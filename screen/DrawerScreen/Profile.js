@@ -30,13 +30,18 @@ import Activityindicator from "../../components/Activityindicator";
 import { Ionicons } from "@expo/vector-icons";
 
 const CreateUser = ({ navigation }) => {
-  navigation.setOptions({
-    headerLeft: () => (
-      <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back-outline" size={24} color="white" />
-      </Pressable>
-    ),
-  });
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.navigate("Dashboard")}
+        >
+          <Ionicons name="arrow-back-outline" size={24} color="white" />
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
   const [address, setAddress] = useState("");
   const [age, setAge] = useState("");
   const [cnic, setCnic] = useState("");

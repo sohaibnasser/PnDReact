@@ -35,27 +35,32 @@ const Passengers = ({ navigation }) => {
   // React.useEffect(() => {
   //   console.log("focused");
   // }, []);
-  navigation.setOptions({
-    headerLeft: () => (
-      <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back-outline" size={24} color="white" />
-      </Pressable>
-    ),
-    headerRight: () => (
-      <Pressable
-        onPress={() => navigation.navigate("Add Passengers")}
-        style={({ pressed }) => [
-          pressed && styles.pressed,
-          styles.headerRightButton,
-        ]}
-      >
-        <Icon name="plus-box" color="#3696f9" size={33} />
-      </Pressable>
-      // <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
-      //   <Ionicons name="arrow-back-outline" size={24} color="white" />
-      // </Pressable>
-    ),
-  });
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.navigate("Dashboard")}
+        >
+          <Ionicons name="arrow-back-outline" size={24} color="white" />
+        </Pressable>
+      ),
+      headerRight: () => (
+        <Pressable
+          onPress={() => navigation.navigate("Add Passengers")}
+          style={({ pressed }) => [
+            pressed && styles.pressed,
+            styles.headerRightButton,
+          ]}
+        >
+          <Icon name="plus-box" color="#3696f9" size={33} />
+        </Pressable>
+        // <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
+        //   <Ionicons name="arrow-back-outline" size={24} color="white" />
+        // </Pressable>
+      ),
+    });
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <View>
@@ -176,7 +181,7 @@ const Passengers = ({ navigation }) => {
             keyboardType="phone-pad"
           />
         </View>
-        <View style={styles.addMorePassengerContainer}>
+        {/* <View style={styles.addMorePassengerContainer}>
           <Pressable
             onPress={() => navigation.navigate("Add Passengers")}
             style={({ pressed }) => pressed && styles.pressed}
@@ -184,7 +189,7 @@ const Passengers = ({ navigation }) => {
             <Icon name="plus-box" color="#3696f9" size={33} />
           </Pressable>
           <Text style={styles.addMorePassenger}>Add More Passenger</Text>
-        </View>
+        </View> */}
       </View>
       <View>
         <Pressable
@@ -208,10 +213,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   headerRightButton: {
-    // alignSelf: "center",
     justifyContent: "center",
-    paddingHorizontal: 10,
-    // marginTop: 10,
+    paddingTop: 10,
+    paddingRight: 10,
   },
   input__icon: {
     flexDirection: "row",
@@ -244,13 +248,13 @@ const styles = StyleSheet.create({
   nameInput: {
     flex: 1,
   },
-  addMorePassengerContainer: { flexDirection: "row", marginVertical: 10 },
-  addMorePassenger: {
-    color: "#3696f9",
-    alignSelf: "center",
-    fontWeight: "bold",
-    marginLeft: 12,
-  },
+  // addMorePassengerContainer: { flexDirection: "row", marginVertical: 10 },
+  // addMorePassenger: {
+  //   color: "#3696f9",
+  //   alignSelf: "center",
+  //   fontWeight: "bold",
+  //   marginLeft: 12,
+  // },
   YearsAndGender: {
     backgroundColor: "#3696f9",
     width: "48%",

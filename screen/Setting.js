@@ -1,16 +1,21 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import Icon from "../components/Icon";
 import { Ionicons } from "@expo/vector-icons";
 
 const Setting = ({ navigation }) => {
-  navigation.setOptions({
-    headerLeft: () => (
-      <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back-outline" size={24} color="white" />
-      </Pressable>
-    ),
-  });
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.navigate("Dashboard")}
+        >
+          <Ionicons name="arrow-back-outline" size={24} color="white" />
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <Pressable style={styles.iconName}>

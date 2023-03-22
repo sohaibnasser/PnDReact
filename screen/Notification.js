@@ -6,13 +6,18 @@ import { Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 const Notification = ({ navigation }) => {
-  navigation.setOptions({
-    headerLeft: () => (
-      <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back-outline" size={24} color="white" />
-      </Pressable>
-    ),
-  });
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.navigate("Dashboard")}
+        >
+          <Ionicons name="arrow-back-outline" size={24} color="white" />
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
   const [activeTab, setActiveTab] = React.useState("tab1");
   const tab1Styles =
     activeTab === "tab1" ? styles.activeTab : styles.inactiveTab;

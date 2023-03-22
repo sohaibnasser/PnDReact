@@ -17,6 +17,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddPassenger from "../../screen/AddPassenger";
 import Notification from "../../screen/Notification";
 import ServiceProviderDetails from "../../screen/ServiceProviderDetails";
+import AddComplain from "../../screen/AddComplain";
 // import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Stack = createNativeStackNavigator();
@@ -80,6 +81,7 @@ const ScreenNav = () => {
         name="Service Provider Details"
         component={ServiceProviderDetails}
       />
+      <Stack.Screen name="Add Complain" component={AddComplain} />
     </Stack.Navigator>
   );
 };
