@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -16,13 +16,76 @@ import { AuthContext } from "../../store/store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Rides } from "./Rides";
 import Passengers from "./Passengers";
-import TermsAndConditions from "./TermsAndConditions";
+// import TermsAndConditions from "./TermsAndConditions";
 import Profile from "./Profile";
 import Notification from "../Notification";
 import Setting from "../Setting";
 import Complains from "./Complains";
 import ServiceProvider from "./ServiceProvider";
 import Leaves from "./Leaves";
+import WebView from "react-native-webview";
+import { Ionicons } from "@expo/vector-icons";
+import UpdatePackage from "./UpdatePackage";
+
+function TermsAndConditions({ navigation }) {
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back-outline" size={24} color="white" />
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View style={{ flex: 1 }}>
+      <WebView source={{ uri: "https://google.com" }} />
+    </View>
+  );
+}
+
+function AboutUs({ navigation }) {
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back-outline" size={24} color="white" />
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View style={{ flex: 1 }}>
+      <WebView source={{ uri: "https://google.com" }} />
+    </View>
+  );
+}
+
+function Privacy({ navigation }) {
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back-outline" size={24} color="white" />
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View style={{ flex: 1 }}>
+      <WebView source={{ uri: "https://google.com" }} />
+    </View>
+  );
+}
 
 function CustomDrawerContent(props) {
   const [state, setState] = useContext(AuthContext);
@@ -83,20 +146,20 @@ function CustomDrawerContent(props) {
         </View> */}
         <UserProfile />
         <DrawerItemList {...props} />
-        <DrawerItem
+        {/* <DrawerItem
           icon={({ size, color }) => (
             <Icon name="help-circle-outline" color={color} size={size} />
           )}
           label="About Us"
-          onPress={() => alert("WebView Link")}
+          onPress={AboutUs}
         />
         <DrawerItem
           icon={({ size, color }) => (
             <Icon name="help-circle-outline" color={color} size={size} />
           )}
           label="Privacy"
-          onPress={() => alert("Link to Privacy")}
-        />
+          onPress={AboutUs}
+        /> */}
       </DrawerContentScrollView>
 
       <DrawerItem
@@ -189,6 +252,15 @@ function MyDrawer() {
         }}
       />
       <Drawer.Screen
+        name="Update Package"
+        component={UpdatePackage}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Icon name="update" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
         name="Profile"
         component={Profile}
         options={{
@@ -238,6 +310,24 @@ function MyDrawer() {
       <Drawer.Screen
         name="Terms & Conditions"
         component={TermsAndConditions}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Icon name="police-badge-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="About Us"
+        component={AboutUs}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Icon name="police-badge-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Privacy"
+        component={Privacy}
         options={{
           drawerIcon: ({ color, size }) => (
             <Icon name="police-badge-outline" size={size} color={color} />

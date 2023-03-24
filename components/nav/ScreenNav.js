@@ -18,6 +18,7 @@ import AddPassenger from "../../screen/AddPassenger";
 import Notification from "../../screen/Notification";
 import ServiceProviderDetails from "../../screen/ServiceProviderDetails";
 import AddComplain from "../../screen/AddComplain";
+import AddLeaves from "../../screen/AddLeaves";
 // import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Stack = createNativeStackNavigator();
@@ -41,47 +42,34 @@ const ScreenNav = () => {
       }}
     >
       {/* {authenticated ? ( */}
-      <Stack.Screen
-        name="Services"
-        component={Root}
-        options={{ headerShown: false }}
-      />
+      <Stack.Group>
+        <Stack.Screen
+          name="Services"
+          component={Root}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Add Passengers"
+          component={AddPassenger}
+          // options={{ headerShown: false }}
+        />
+        <Stack.Screen name="Notification" component={Notification} />
+        <Stack.Screen
+          name="Service Provider Details"
+          component={ServiceProviderDetails}
+        />
+        <Stack.Screen name="Add Complain" component={AddComplain} />
+        <Stack.Screen name="Add Leave" component={AddLeaves} />
+      </Stack.Group>
       {/* ) : ( */}
-      <>
-        {/* <Stack.Screen
-            name="Services"
-            component={Root}
-            options={{ headerShown: false }}
-            // options={{ headerLeft: () => <DrawerNav /> }}
-          /> */}
+
+      <Stack.Group>
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Create Account" component={CreateUser} />
         <Stack.Screen name="Verification" component={PhoneVerification} />
         <Stack.Screen name="Forgot Password" component={ForgotPassword} />
-        {/* <Stack.Screen
-            name="Services"
-            component={ServiceProvider}
-            options={{ headerLeft: () => <DrawerNav /> }}
-          /> */}
-      </>
+      </Stack.Group>
       {/* )} */}
-
-      <Stack.Screen
-        name="Add Passengers"
-        component={AddPassenger}
-        // options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        // options={{ headerShown: false }}
-      />
-      <Stack.Screen name="Notification" component={Notification} />
-      <Stack.Screen
-        name="Service Provider Details"
-        component={ServiceProviderDetails}
-      />
-      <Stack.Screen name="Add Complain" component={AddComplain} />
     </Stack.Navigator>
   );
 };

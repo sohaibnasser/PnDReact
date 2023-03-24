@@ -1,251 +1,221 @@
-import {
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-} from "react-native";
-import { Picker } from "@react-native-picker/picker";
+import { StyleSheet, Text, View, Pressable, Image } from "react-native";
 import React, { useState } from "react";
+import { SafeAreaView } from "react-native";
+import Activityindicator from "../components/Activityindicator";
+import Icon from "../components/Icon";
 import UserInput from "../components/auth/UserInput";
 import Button from "../components/auth/Button";
-import Icon from "../components/Icon";
-import * as ImagePicker from "expo-image-picker";
-import Activityindicator from "../components/Activityindicator";
+import { Ionicons } from "@expo/vector-icons";
 
-const AddPassenger = ({ navigation }) => {
-  const [age, setAge] = useState("");
-  const [cnic, setCnic] = useState("");
-  const [contact, setContact] = useState("");
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+const Passengers = ({ navigation }) => {
+  const [parentName, setParentName] = useState("");
+  const [parentCnic, setParentCnic] = useState("");
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [parentContact, setParentContact] = useState("");
+  const [parentEmail, setParentEmail] = useState("");
+
+  const [age, setAge] = useState(5);
   const [gender, setGender] = useState("");
-  console.log(" gneder", gender);
 
-  const genderOptions = [
-    { label: "Select Gender", value: "" },
-    { label: "Male", value: "male" },
-    { label: "Female", value: "female" },
-    { label: "Non-Binary", value: "non-binary" },
-    { label: "Prefer Not to Say", value: "not-specified" },
-  ];
-
-  const [imageUrl, setImageUrl] = React.useState("");
-
-  const takePhotoAndUpload = async () => {
-    let permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (permissionResult.granted === false) {
-      alert("Camera access is required");
+  const inreaseAge = () => {
+    setAge(age + 1);
+  };
+  const decreaseAge = () => {
+    if (age <= 1) {
       return;
     }
-    let pickerResult = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: true,
+    setAge(age - 1);
+  };
+  const selectMaleHandler = () => {
+    setGender("Male");
+  };
+  const selectFemaleHandler = () => {
+    setGender("Female");
+  };
+  // React.useEffect(() => {
+  //   console.log("focused");
+  // }, []);
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          style={{ marginLeft: 20 }}
+          onPress={() => navigation.navigate("Dashboard")}
+        >
+          <Ionicons name="arrow-back-outline" size={24} color="white" />
+        </Pressable>
+      ),
+      headerRight: () => (
+        <Pressable
+          onPress={() => navigation.navigate("Add Passengers")}
+          style={({ pressed }) => [
+            pressed && styles.pressed,
+            styles.headerRightButton,
+          ]}
+        >
+          <Icon name="plus-box" color="#3696f9" size={33} />
+        </Pressable>
+        // <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
+        //   <Ionicons name="arrow-back-outline" size={24} color="white" />
+        // </Pressable>
+      ),
     });
-    if (pickerResult.canceled === true) {
-      return;
-    }
-    let base64Image = `${pickerResult.assets[0].uri}`;
-    setImageUrl(base64Image);
-  };
-
-  const handleSubmit = async () => {
-    if (!cnic || !name || !age || !email || !password || !contact) {
-      alert("all field are required");
-      setIsLoading(false);
-      return;
-    }
-    try {
-      setIsLoading(true);
-      const response = await fetch(``, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          imageUrl,
-          name,
-          age,
-          gender,
-          cnic,
-          email,
-          password,
-        }),
-      });
-      const responseData = await response.json();
-      console.log("response data", responseData);
-      // setIsLoading(false);
-      if (responseData.message !== "success") {
-        // alert(responseData.message);
-      } else {
-        const otp = responseData.result.otp;
-        console.log(otp);
-        const email = responseData.result.Email;
-        const password = responseData.result.Password;
-
-        navigation.navigate("", {
-          otp,
-          email,
-          password,
-        });
-      }
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(true);
-      console.log(error);
-      // alert("error while sign in");
-      setIsLoading(false);
-    }
-  };
-
+  }, [navigation]);
   return (
-    <>
-      <SafeAreaView style={styles.container}>
-        <Activityindicator isLoading={isLoading} />
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Pressable style={styles.profileImage} onPress={takePhotoAndUpload}>
-              {imageUrl ? (
-                <View>
-                  <Image
-                    source={{
-                      uri: imageUrl,
-                    }}
-                    style={{ width: 70, height: 70, borderRadius: 35 }}
-                  />
-                </View>
-              ) : (
-                <View
-                  style={{
-                    width: 70,
-                    height: 70,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {/* <Image
-                        source={require("../assets/profile.svg")}
-                        style={{ width: 5, height: 5 }}
-                      /> */}
-                  <Icon name="camera" size={30} />
-                </View>
-              )}
-            </Pressable>
+    <View style={styles.container}>
+      <View>
+        <Activityindicator />
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          {/* <ImagePicker /> */}
+          {/* <UploadImage /> */}
+          <Pressable style={styles.profileImage}>
+            <View>
+              <Image source={{}} />
+            </View>
+
             <View
-              style={[
-                styles.input__icon,
-                styles.paddingVertical,
-                styles.nameInput,
+              style={{
+                width: 70,
+                height: 70,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Icon name="camera" size={30} />
+            </View>
+          </Pressable>
+          <View
+            style={[
+              styles.input__icon,
+              styles.paddingVertical,
+              styles.nameInput,
+            ]}
+          >
+            <Icon name="account-outline" size={30} color="gray" />
+
+            <UserInput
+              placeholder="Name"
+              autoCapitalize="words"
+              autoCorrect={false}
+              value={parentName}
+              setValue={setParentName}
+            />
+          </View>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            marginVertical: 10,
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={styles.YearsAndGender}>
+            <Pressable
+              style={({ pressed }) => pressed && styles.pressed}
+              onPress={inreaseAge}
+            >
+              <Icon name="plus" size={20} color="#fff" />
+            </Pressable>
+            <Text style={{ color: "#fff", fontSize: 20 }}>{age} Years</Text>
+            <Pressable
+              style={({ pressed }) => pressed && styles.pressed}
+              onPress={decreaseAge}
+            >
+              <Icon name="minus-thick" size={16} color="#fff" />
+            </Pressable>
+          </View>
+          <View style={styles.YearsAndGender}>
+            <Pressable
+              onPress={selectMaleHandler}
+              style={({ pressed }) => [
+                pressed && styles.pressed,
+                styles.bgColor,
               ]}
             >
-              <Icon name="account-outline" size={30} color="gray" />
-
-              <UserInput
-                placeholder="Name"
-                autoCapitalize="words"
-                autoCorrect={false}
-                value={name}
-                setValue={setName}
-              />
-            </View>
+              <Text>Male</Text>
+            </Pressable>
+            <Pressable
+              onPress={selectFemaleHandler}
+              style={({ pressed }) => [
+                pressed && styles.pressed,
+                ,
+                styles.bgColor,
+              ]}
+            >
+              <Text>Female</Text>
+            </Pressable>
           </View>
-          <View style={[styles.input__icon, styles.paddingVertical]}>
-            <Icon name="human-male" size={30} color="gray" />
-            <UserInput
-              value={age}
-              setValue={setAge}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="number-pad"
-              placeholder="Age"
-            />
-          </View>
-          <View style={[styles.dropDown, styles.nameInput]}>
-            <View>
-              <Picker
-                selectedValue={gender}
-                onValueChange={(itemValue) => setGender(itemValue)}
-              >
-                {genderOptions.map((option) => (
-                  <Picker.Item
-                    key={option.value}
-                    label={option.label}
-                    value={option.value}
-                  />
-                ))}
-              </Picker>
-            </View>
-          </View>
-          <View style={[styles.input__icon, styles.paddingVertical]}>
-            <Icon name="card-bulleted-outline" size={30} color="gray" />
-            <UserInput
-              placeholder="CNIC No._ _ _ _ _  _ _ _ _ _ _ _  _"
-              autoCorrect={false}
-              value={cnic}
-              setValue={setCnic}
-              keyboardType="number-pad"
-            />
-          </View>
-          <View style={[styles.input__icon, styles.paddingVertical]}>
-            <Icon name="email" size={30} color="gray" />
-            <UserInput
-              placeholder="Email Address"
-              keyboardType="email-address"
-              autoCorrect={false}
-              value={email}
-              setValue={setEmail}
-            />
-          </View>
-          <View style={[styles.input__icon, styles.paddingVertical]}>
-            <Icon name="cellphone" size={30} color="gray" />
-            <UserInput
-              placeholder="Phone No"
-              autoCorrect={false}
-              value={contact}
-              setValue={setContact}
-              keyboardType="phone-pad"
-            />
-          </View>
+        </View>
+        <View style={[styles.input__icon, styles.paddingVertical]}>
+          <Icon name="card-bulleted-outline" size={30} color="gray" />
+          <UserInput
+            placeholder="CNIC No._ _ _ _ _ - _ _ _ _ _ _ _ - _"
+            autoCorrect={false}
+            value={parentCnic}
+            setValue={setParentCnic}
+            keyboardType="number-pad"
+          />
+        </View>
+        <View style={[styles.input__icon, styles.paddingVertical]}>
+          <Icon name="email" size={30} color="gray" />
+          <UserInput
+            placeholder="Email Address"
+            keyboardType="email-address"
+            autoCorrect={false}
+            value={parentEmail}
+            setValue={setParentEmail}
+          />
+        </View>
+        <View style={[styles.input__icon, styles.paddingVertical]}>
+          <Icon name="cellphone" size={30} color="gray" />
+          <UserInput
+            placeholder="phone"
+            autoCorrect={false}
+            value={parentContact}
+            setValue={setParentContact}
+            keyboardType="phone-pad"
+          />
+        </View>
+        {/* <View style={styles.addMorePassengerContainer}>
           <Pressable
-            onPress={handleSubmit}
+            onPress={() => navigation.navigate("Add Passengers")}
             style={({ pressed }) => pressed && styles.pressed}
           >
-            <Button>
-              <Text>SAVE</Text>
-            </Button>
+            <Icon name="plus-box" color="#3696f9" size={33} />
           </Pressable>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+          <Text style={styles.addMorePassenger}>Add More Passenger</Text>
+        </View> */}
+      </View>
+      <View>
+        <Pressable
+          style={({ pressed }) => pressed && styles.pressed}
+          onPress={() => {}}
+        >
+          <Button>CONTINUE</Button>
+        </Pressable>
+      </View>
+    </View>
   );
 };
 
-export default AddPassenger;
+export default Passengers;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
-    paddingVertical: 5,
-    stickyHeaderHiddenOnScroll: false,
+    paddingVertical: 8,
+    justifyContent: "space-between",
   },
-  paddingVertical: {
-    paddingVertical: 10,
-  },
-  pressed: {
-    opacity: 0.75,
+  headerRightButton: {
+    justifyContent: "center",
+    paddingTop: 10,
+    paddingRight: 10,
   },
   input__icon: {
     flexDirection: "row",
@@ -257,29 +227,11 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     paddingLeft: 10,
   },
-
-  createAccount__text: {
-    color: "#49bece",
-    fontSize: 15,
+  paddingVertical: {
+    paddingVertical: 10,
   },
-  phoneInput__Icon: {
-    backgroundColor: "grey",
-    height: 50,
-    justifyContent: "center",
-    borderRadius: 6,
-  },
-  termsAndconditions: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  createAccount: {
-    flexDirection: "row",
-    marginBottom: 5,
-  },
-
-  nameInput: {
-    flex: 1,
+  pressed: {
+    opacity: 0.75,
   },
   profileImage: {
     width: 70,
@@ -293,12 +245,31 @@ const styles = StyleSheet.create({
     borderWidth: 0.1,
     borderColorL: "black",
   },
-  dropDown: {
-    borderWidth: 0.5,
-    borderColor: "gray",
-    backgroundColor: "#ffffff",
-    borderRadius: 6,
-    marginVertical: 5,
-    // paddingVertical: 0,
+  nameInput: {
+    flex: 1,
+  },
+  // addMorePassengerContainer: { flexDirection: "row", marginVertical: 10 },
+  // addMorePassenger: {
+  //   color: "#3696f9",
+  //   alignSelf: "center",
+  //   fontWeight: "bold",
+  //   marginLeft: 12,
+  // },
+  YearsAndGender: {
+    backgroundColor: "#3696f9",
+    width: "48%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    height: 50,
+    alignItems: "center",
+    borderRadius: 4,
+  },
+  bgColor: {
+    // backgroundColor: bgColor,
+    width: "40%",
+    height: "50%",
+    borderRadius: 4,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

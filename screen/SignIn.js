@@ -63,7 +63,7 @@ const SignIn = ({ navigation, route }) => {
 
   //   const [state, setState] = useContext(AuthContext);
   const handleSubmit = async () => {
-    // setIsLoading(true);
+    setIsLoading(true);
     if (!email || !password) {
       alert("all field are required");
       // setIsLoading(false);

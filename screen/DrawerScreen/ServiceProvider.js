@@ -9,6 +9,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 // import React, { useContext } from "react";
 import Icon from "../../components/Icon";
+import Rating from "../../components/Rating";
 
 // import { API } from "../config";
 // import { AuthContext } from "../store/store";
@@ -19,7 +20,7 @@ const data = [
     name: "Irfan Ali",
     contact: "+9231123203333",
     ServiceProvider1: "Service Provider 1",
-    RatingStar: "***",
+    RatingStar: "3",
     backgroundColor: "#3497fd",
   },
   {
@@ -27,7 +28,7 @@ const data = [
     name: "Muddasir Khan",
     contact: "+9231123203333",
     ServiceProvider1: "Service Provider 2",
-    RatingStar: "****",
+    RatingStar: "4",
     backgroundColor: "#55cd85",
   },
   {
@@ -35,7 +36,7 @@ const data = [
     name: "M Afnan",
     contact: "1123203333",
     ServiceProvider1: "Service Provider 3",
-    RatingStar: "*****",
+    RatingStar: "3",
     backgroundColor: "#55cd85",
   },
   {
@@ -43,7 +44,7 @@ const data = [
     name: "Adnan Khan",
     contact: "1123203333",
     ServiceProvider1: "Service Provider 4",
-    RatingStar: "***",
+    RatingStar: "2",
 
     backgroundColor: "#3497fd",
   },
@@ -52,7 +53,7 @@ const data = [
     name: "Asad Khan",
     contact: "1123203333",
     ServiceProvider1: "Service Provider 5",
-    RatingStar: "***",
+    RatingStar: "5",
     backgroundColor: "#3497fd",
   },
   {
@@ -60,7 +61,7 @@ const data = [
     name: "Muhammed ali",
     contact: "+9231123203333",
     ServiceProvider1: "Service Provider 6",
-    RatingStar: "***",
+    RatingStar: "4",
     backgroundColor: "#55cd85",
   },
   {
@@ -68,7 +69,7 @@ const data = [
     name: "Khan",
     contact: "+9231123203333",
     ServiceProvider1: "Service Provider 7",
-    RatingStar: "***",
+    RatingStar: "3",
     backgroundColor: "#55cd85",
   },
   {
@@ -76,7 +77,7 @@ const data = [
     name: "Asad Ullah",
     contact: "+9231123203333",
     ServiceProvider1: "Service Provider 8",
-    RatingStar: "*****",
+    RatingStar: "3",
 
     backgroundColor: "#3497fd",
   },
@@ -178,14 +179,14 @@ const ServiceProvider = ({ navigation }) => {
                     <Text>Type:{item.item.type}</Text>
                   </View>
 
-                  <Text
+                  <View
                     style={[
                       styles.serviceProviderText,
                       { alignSelf: "flex-end" },
                     ]}
                   >
-                    {item.item.RatingStar}
-                  </Text>
+                    <Rating rating={item.item.RatingStar} />
+                  </View>
                 </View>
               </View>
               <View>

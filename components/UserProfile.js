@@ -8,6 +8,7 @@ import {
 } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import { API } from "../config";
+import Rating from "./Rating";
 
 function UserProfile() {
   const route = useRoute();
@@ -85,7 +86,9 @@ function UserProfile() {
           <Text style={styles.userEmail}>{para.parentEmail}</Text>
 
           <Text style={styles.userEmail}>{para.packageName} </Text>
-          <Text>rating:{para.parentRating}</Text>
+          <View>
+            <Rating rating={para.parentRating} />
+          </View>
         </View>
       </View>
       {/* <DrawerContentScrollView {...props}> */}

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "../components/Icon";
 import { Badge } from "react-native-paper";
+import Rating from "../components/Rating";
 
 const data = [
   {
@@ -97,7 +98,7 @@ const ServiceProviderDetails = ({ route, navigation }) => {
               <Icon name="chevron-right" color="green" size={28} />
             </View>
             <View>
-              <Text>Rating</Text>
+              <Rating rating={3} />
             </View>
           </View>
           <View style={{ flexDirection: "row", alignItems: "center" }}>

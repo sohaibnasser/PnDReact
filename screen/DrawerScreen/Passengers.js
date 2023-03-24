@@ -1,275 +1,293 @@
-import { StyleSheet, Text, View, Pressable, Image } from "react-native";
-import React, { useState } from "react";
-import { SafeAreaView } from "react-native";
-import Activityindicator from "../../components/Activityindicator";
-import Icon from "../../components/Icon";
-import UserInput from "../../components/auth/UserInput";
-import Button from "../../components/auth/Button";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import React from "react";
+// import React, { useContext } from "react";
+import Icon from "../../components/Icon";
 
-const Passengers = ({ navigation }) => {
-  const [parentName, setParentName] = useState("");
-  const [parentCnic, setParentCnic] = useState("");
+// import { API } from "../config";
+// import { AuthContext } from "../store/store";
 
-  const [parentContact, setParentContact] = useState("");
-  const [parentEmail, setParentEmail] = useState("");
+const data = [
+  {
+    id: 1,
+    name: "Irfan Ali",
+    Email: "Irfan@gmail.com",
+    gender: "male",
+    image: "IMAGE",
+    backgroundColor: "#3497fd",
+  },
+  {
+    id: 2,
+    name: "Muddasir Khan",
+    Email: "Irfan@gmail.com",
+    gender: "male",
+    image: "IMAGE",
+    backgroundColor: "#55cd85",
+  },
+  {
+    id: 3,
+    name: "M Afnan",
+    Email: "Irfan@gmail.com ",
+    gender: "Female",
+    image: "IMAGE",
+    backgroundColor: "#55cd85",
+  },
+  {
+    id: 4,
+    name: "Adnan Khan",
+    Email: "Irfan@gmail.com ",
+    gender: "male",
+    image: "IMAGE",
 
-  const [age, setAge] = useState(5);
-  const [gender, setGender] = useState("");
+    backgroundColor: "#3497fd",
+  },
+  {
+    id: 5,
+    name: "Asad Khan",
+    Email: "Irfan@gmail.com",
+    gender: "Female",
+    image: "IMAGE",
+    backgroundColor: "#3497fd",
+  },
+  {
+    id: 6,
+    name: "Muhammed ali",
+    Email: "Irfan@gmail.com",
+    gender: "male",
+    image: "IMAGE",
+    backgroundColor: "#55cd85",
+  },
+  {
+    id: 7,
+    name: "Khan",
+    Email: "Irfan@gmail.com",
+    gender: "Female",
+    image: "IMAGE",
+    backgroundColor: "#55cd85",
+  },
+  {
+    id: 8,
+    name: "Asad Ullah",
+    Email: "Irfan@gmail.com",
+    gender: "male",
+    image: "IMAGE",
 
-  const inreaseAge = () => {
-    setAge(age + 1);
-  };
-  const decreaseAge = () => {
-    if (age <= 1) {
-      return;
-    }
-    setAge(age - 1);
-  };
-  const selectMaleHandler = () => {
-    setGender("Male");
-  };
-  const selectFemaleHandler = () => {
-    setGender("Female");
-  };
-  // React.useEffect(() => {
-  //   console.log("focused");
-  // }, []);
+    backgroundColor: "#3497fd",
+  },
+];
+
+const ServiceProvider = ({ navigation }) => {
   React.useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
         <Pressable
           style={{ marginLeft: 20 }}
-          onPress={() => navigation.navigate("Dashboard")}
+          onPress={() => navigation.goBack()}
         >
           <Ionicons name="arrow-back-outline" size={24} color="white" />
         </Pressable>
       ),
-      headerRight: () => (
-        <Pressable
-          onPress={() => navigation.navigate("Add Passengers")}
-          style={({ pressed }) => [
-            pressed && styles.pressed,
-            styles.headerRightButton,
-          ]}
-        >
-          <Icon name="plus-box" color="#3696f9" size={33} />
-        </Pressable>
-        // <Pressable style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}>
-        //   <Ionicons name="arrow-back-outline" size={24} color="white" />
-        // </Pressable>
-      ),
     });
   }, [navigation]);
-  return (
-    <View style={styles.container}>
-      <View>
-        <Activityindicator />
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          {/* <ImagePicker /> */}
-          {/* <UploadImage /> */}
-          <Pressable style={styles.profileImage}>
-            <View>
-              <Image source={{}} />
-            </View>
+  //   const [state, setState] = useContext(AuthContext);
+  // async function getUserData() {
+  //   const response = await fetch(`${API}/profile/6`, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   const responseData = await response.json();
+  //   const oop = responseData.result;
+  //   setState(oop);
+  //   //   return responseData;
+  //   //   console.log("response Data", responseData);
+  //   //   setIsLoading(false);
+  //   //   if (responseData.message === "success") {
+  //   //     alert("An Otp is sent to your given Email")Irfan@gmail.com navigation.navigate("SignIn");
 
-            <View
-              style={{
-                width: 70,
-                height: 70,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Icon name="camera" size={30} />
-            </View>
-          </Pressable>
+  //   // setIsLoading(false);
+  //   //   } else {
+  //   //     // store to context
+  //   //     // setState(data);
+  //   //     // store to asyncstorage
+  //   //     // await AsyncStorage.setItem("@auth", JSON.stringify(data));
+  //   //     // setIsLoading(false);
+  //   //     alert(responseData.error);
+  //   //   }
+  //   //   } catch (error) {
+  //   //     console.log("not ", error.message);
+  //   //     alert(error.message);
+  //   //     // setIsLoading(false);
+  //   //   }
+  // }
+  // React.useEffect(() => {
+  //   getUserData();
+  // }, []);
+  // console.log("stateData=>", state);
+  return (
+    <View style={styles.mainContainer}>
+      <FlatList
+        numColumns={2}
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={(item) => (
           <View
             style={[
-              styles.input__icon,
-              styles.paddingVertical,
-              styles.nameInput,
+              styles.tilesItem,
+              { backgroundColor: item.item.backgroundColor },
             ]}
           >
-            <Icon name="account-outline" size={30} color="gray" />
+            <Pressable
+              // onPress={() =>
+              //   navigation.navigate("Service Provider Details", {
+              //     itemId: item.item.id,
+              //     name: item.item.ServiceProvider1,
+              //   })
+              // }
+              style={({ pressed }) => [
+                // pressed && styles.pressed,
+                styles.button,
+              ]}
+            >
+              <View style={styles.innerContainer}>
+                <View>
+                  <Text
+                    style={[styles.serviceProviderText, { marginBottom: 5 }]}
+                  >
+                    {item.item.ServiceProvider1}
+                  </Text>
+                  <View
+                    style={{
+                      backgroundColor: "#90d9dd",
+                      paddingHorizontal: 4,
+                      paddingVertical: 4,
+                      borderRadius: 4,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginBottom: 5,
+                    }}
+                  >
+                    <Text>{item.item.name}</Text>
+                  </View>
+                  <View
+                    style={{
+                      backgroundColor: "#90d9dd",
+                      paddingHorizontal: 4,
+                      paddingVertical: 4,
+                      borderRadius: 4,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginBottom: 10,
+                    }}
+                  >
+                    <Text>Type:{item.item.Email}</Text>
+                  </View>
 
-            <UserInput
-              placeholder="Name"
-              autoCapitalize="words"
-              autoCorrect={false}
-              value={parentName}
-              setValue={setParentName}
-            />
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            marginVertical: 10,
-            justifyContent: "space-between",
-          }}
-        >
-          <View style={styles.YearsAndGender}>
-            <Pressable
-              style={({ pressed }) => pressed && styles.pressed}
-              onPress={inreaseAge}
-            >
-              <Icon name="plus" size={20} color="#fff" />
-            </Pressable>
-            <Text style={{ color: "#fff", fontSize: 20 }}>{age} Years</Text>
-            <Pressable
-              style={({ pressed }) => pressed && styles.pressed}
-              onPress={decreaseAge}
-            >
-              <Icon name="minus-thick" size={16} color="#fff" />
+                  <Text
+                    style={[
+                      styles.serviceProviderText,
+                      { alignSelf: "flex-end" },
+                    ]}
+                  >
+                    {item.item.gender}
+                  </Text>
+                </View>
+              </View>
+              <View>
+                <Pressable
+                  style={({ pressed }) => [
+                    pressed && styles.pressed,
+                    styles.detailsButton,
+                  ]}
+                >
+                  <Text style={styles.serviceProviderText}>Ask For Bid</Text>
+                </Pressable>
+              </View>
             </Pressable>
           </View>
-          <View style={styles.YearsAndGender}>
-            <Pressable
-              onPress={selectMaleHandler}
-              style={({ pressed }) => [
-                pressed && styles.pressed,
-                styles.bgColor,
-              ]}
-            >
-              <Text>Male</Text>
-            </Pressable>
-            <Pressable
-              onPress={selectFemaleHandler}
-              style={({ pressed }) => [
-                pressed && styles.pressed,
-                ,
-                styles.bgColor,
-              ]}
-            >
-              <Text>Female</Text>
-            </Pressable>
-          </View>
-        </View>
-        <View style={[styles.input__icon, styles.paddingVertical]}>
-          <Icon name="card-bulleted-outline" size={30} color="gray" />
-          <UserInput
-            placeholder="CNIC No._ _ _ _ _ - _ _ _ _ _ _ _ - _"
-            autoCorrect={false}
-            value={parentCnic}
-            setValue={setParentCnic}
-            keyboardType="number-pad"
-          />
-        </View>
-        <View style={[styles.input__icon, styles.paddingVertical]}>
-          <Icon name="email" size={30} color="gray" />
-          <UserInput
-            placeholder="Email Address"
-            keyboardType="email-address"
-            autoCorrect={false}
-            value={parentEmail}
-            setValue={setParentEmail}
-          />
-        </View>
-        <View style={[styles.input__icon, styles.paddingVertical]}>
-          <Icon name="cellphone" size={30} color="gray" />
-          <UserInput
-            placeholder="phone"
-            autoCorrect={false}
-            value={parentContact}
-            setValue={setParentContact}
-            keyboardType="phone-pad"
-          />
-        </View>
-        {/* <View style={styles.addMorePassengerContainer}>
-          <Pressable
-            onPress={() => navigation.navigate("Add Passengers")}
-            style={({ pressed }) => pressed && styles.pressed}
-          >
-            <Icon name="plus-box" color="#3696f9" size={33} />
-          </Pressable>
-          <Text style={styles.addMorePassenger}>Add More Passenger</Text>
-        </View> */}
-      </View>
-      <View>
-        <Pressable
-          style={({ pressed }) => pressed && styles.pressed}
-          onPress={() => {}}
-        >
-          <Button>CONTINUE</Button>
-        </Pressable>
-      </View>
+        )}
+      />
     </View>
   );
 };
 
-export default Passengers;
+export default ServiceProvider;
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    justifyContent: "space-between",
+    backgroundColor: "white",
   },
-  headerRightButton: {
-    justifyContent: "center",
-    paddingTop: 10,
-    paddingRight: 10,
+  services: {
+    maxWidth: "100%",
+    width: 150,
+    maxHeight: "100%",
+    height: 150,
+
+    margin: 3,
+    elevation: 3,
+    shadowColor: "#000000",
+    shadowRadius: 4,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.4,
+    backgroundColor: "red",
   },
-  input__icon: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 0.5,
-    borderColor: "gray",
-    backgroundColor: "#ffffff",
+  service: {
     borderRadius: 6,
-    marginVertical: 5,
-    paddingLeft: 10,
-  },
-  paddingVertical: {
-    paddingVertical: 10,
+    alignItems: "center",
+    color: "white",
   },
   pressed: {
-    opacity: 0.75,
+    opacity: 0.7,
   },
-  profileImage: {
-    width: 70,
-    height: 70,
-    backgroundColor: "#ffffff",
-    borderRadius: 35,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 30,
-    marginRight: 10,
-    borderWidth: 0.1,
-    borderColorL: "black",
+  ServiceProviderName: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
   },
-  nameInput: {
+  tilesItem: {
     flex: 1,
+    margin: 4,
+    height: 150,
+    elevation: 4,
+    backgroundColor: "white",
+
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 8,
+    shadowOpacity: 0.25,
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
-  // addMorePassengerContainer: { flexDirection: "row", marginVertical: 10 },
-  // addMorePassenger: {
-  //   color: "#3696f9",
-  //   alignSelf: "center",
-  //   fontWeight: "bold",
-  //   marginLeft: 12,
-  // },
-  YearsAndGender: {
-    backgroundColor: "#3696f9",
-    width: "48%",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    height: 50,
-    alignItems: "center",
-    borderRadius: 4,
+  button: { flex: 1 },
+  innerContainer: {
+    flex: 1,
+    padding: 6,
   },
-  bgColor: {
-    // backgroundColor: bgColor,
-    width: "40%",
-    height: "50%",
+  pressed: {
+    opacity: 0.7,
+  },
+  serviceProviderText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  detailsButton: {
+    borderWidth: 0.4,
+    maxWidth: "100%",
+    width: 100,
+    alignSelf: "center",
     borderRadius: 4,
+    padding: 3,
+    borderColor: "white",
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 10,
   },
 });

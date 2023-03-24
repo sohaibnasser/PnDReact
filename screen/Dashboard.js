@@ -46,6 +46,18 @@ const data = [
     backgroundColor: "#3497fd",
     icon: "seat-passenger",
   },
+  {
+    id: 7,
+    name: "Leaves",
+    backgroundColor: "#3497fd",
+    icon: "seat-passenger",
+  },
+  {
+    id: 8,
+    name: "Complains",
+    backgroundColor: "#55cd85",
+    icon: "seat-passenger",
+  },
 ];
 
 const Dashboard = ({ navigation }) => {
@@ -65,6 +77,7 @@ const Dashboard = ({ navigation }) => {
     <View style={styles.mainContaier}>
       <FlatList
         numColumns={2}
+        showsVerticalScrollIndicator={false}
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={(item) => (
@@ -75,7 +88,11 @@ const Dashboard = ({ navigation }) => {
             ]}
           >
             <Pressable
-              onPress={() => navigation.navigate(item.item.name)}
+              onPress={() =>
+                navigation.navigate(item.item.name, {
+                  name: item.item.name,
+                })
+              }
               style={({ pressed }) => [
                 pressed && styles.pressed,
                 styles.button,
