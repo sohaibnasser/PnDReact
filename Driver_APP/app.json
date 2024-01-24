@@ -1,0 +1,72 @@
+{
+  "expo": {
+    "name": "PD_Driver",
+    "slug": "PD_Driver",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash_bg.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The $(PRODUCT_NAME) accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "infoPlist": {
+        "NSLocationAlwaysUsageDescription":
+          "This app uses the always location access in the background for improved pickups and dropoffs, customer support and safety purpose.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription":
+          "This app uses the always location access in the background for improved pickups and dropoffs, customer support and safety purpose.",
+        "NSLocationWhenInUseUsageDescription":
+          "For a reliable ride, App collects location data from the time you open the app until a trip ends. This improves pickups, support, and more.",
+        "NSCameraUsageDescription":
+          "This app uses the camera to take your profile picture.",
+        "NSPhotoLibraryUsageDescription":
+          "This app uses Photo Library for uploading your profile picture.",
+    
+        "UIBackgroundModes": ["location", "fetch"]
+      },
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.asad_ullah.PD_Driver",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCmIU89aUlA7HSiAvrduza6vWcHXeroGn4"
+        }
+      },
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "ACCESS_BACKGROUND_LOCATION", "FOREGROUND_SERVICE"],
+  "useNextNotificationsApi": true
+    },
+   
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6cc40f87-40d6-499e-857c-30744db3d600"
+      }
+    }
+  }
+}

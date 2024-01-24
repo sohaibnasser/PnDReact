@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "297456207487",
+    "project_id": "pickdrop-15a47",
+    "storage_bucket": "pickdrop-15a47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297456207487:android:235ac92b15f6cb1c59614a",
+        "android_client_info": {
+          "package_name": "com.pickNdrop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9FL8vTczBJO-t1_DwZ1zMCuEOidhSfmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,67 @@
+{
+  "expo": {
+    "name": "pnd_parent",
+    "slug": "pnd_parent",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash_bg.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The $(PRODUCT_NAME) accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationAlwaysUsageDescription":
+          "This app uses the always location access in the background for improved pickups and dropoffs, customer support and safety purpose.",
+       " NSLocationWhenInUseUsageDescription":
+          "For a reliable ride, App collects location data from the time you open the app until a trip ends. This improves pickups, support, and more.",
+        "NSCameraUsageDescription":
+          "This app uses the camera to take your profile picture.",
+        "NSPhotoLibraryUsageDescription":
+          "This app uses Photo Library for uploading your profile picture."
+       
+        
+      }
+     
+  
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.asad_ullah.pnd_parent",
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyCmIU89aUlA7HSiAvrduza6vWcHXeroGn4" }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ff801bad-0e47-4835-822a-1c0c30b67f6c"
+      }
+    }
+  }
+}
