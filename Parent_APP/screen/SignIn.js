@@ -74,6 +74,12 @@ const SignIn = ({ navigation, route }) => {
     if (validateForm()) {
       try {
         setIsLoading(true);
+        console.log(JSON.stringify({
+          email: parentEmail,
+          password: parentPassword,
+          token: UUid,
+          uuid: UUid,
+        }))
         const response = await fetch(`${API}/parent_login`, {
           method: "POST",
           headers: {

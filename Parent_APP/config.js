@@ -1,3 +1,9 @@
+// export const API = "https://930e-154-192-69-15.ngrok-free.app/mobileapi/user";
+// export const LeaveApi = "https://930e-154-192-69-15.ngrok-free.app/mobileapi/leave";
+// export const ComplainApi = "https://930e-154-192-69-15.ngrok-free.app/mobileapi/complain";
+// export const RidesApi = "https://930e-154-192-69-15.ngrok-free.app/mobileapi/ride";
+// export const dependentApi = "https://930e-154-192-69-15.ngrok-free.app/mobileapi/dependent";
+// export const mobileApi = "https://930e-154-192-69-15.ngrok-free.app/mobileapi";
 export const API = "http://62.72.3.95:8090/mobileapi/user";
 export const LeaveApi = "http://62.72.3.95:8090/mobileapi/leave";
 export const ComplainApi = "http://62.72.3.95:8090/mobileapi/complain";
