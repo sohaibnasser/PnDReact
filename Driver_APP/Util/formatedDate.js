@@ -1,24 +1,15 @@
 export function formatDate(dateString) {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const dateParts = dateString.split("T")[0].split("-");
+  // Split dateString into date and time parts
+  const [datePart, timePart] = dateString.split("T");
+  const dateParts = datePart.split("-");
   const year = dateParts[0];
-  const month = parseInt(dateParts[1], 10);
-  const day = parseInt(dateParts[2], 10);
+  const month = dateParts[1].padStart(2, '0'); // Ensure two digits with leading zeros
+  const day = dateParts[2].padStart(2, '0'); // Ensure two digits with leading zeros
 
-  const formattedDate = `${months[month - 1]} ${day}, ${year}`;
+  // Extract hours and minutes from timePart
+  const [hours, minutes] = timePart.split(":");
+  
+  // Format the date
+  const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
   return formattedDate;
 }

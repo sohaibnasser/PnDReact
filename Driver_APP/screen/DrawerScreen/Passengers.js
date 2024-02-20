@@ -41,8 +41,8 @@ const Passengers = ({ navigation }) => {
   let Drop = "";
 
   if (selectedItem) {
-    Pick = selectedItem.pickupLocation.split(",");
-    Drop = selectedItem.dropLocation.split(",");
+    Pick = selectedItem.bidDto.bidPickupLocation.split(",");
+    Drop = selectedItem.bidDto.bidPickupLocation.split(",");
   }
   const handleModalClose = () => {
     setModalVisible(false);
@@ -63,7 +63,7 @@ const Passengers = ({ navigation }) => {
       try {
         setIsLoading(true);
         const response = await fetch(
-          `${mobileApi}/driver/passengerForDriver/${driverID}`
+          `${mobileApi}/driver/passengerForDriverUsingBid/${driverID}`
         );
         const responseData = await response.json();
         if (responseData?.code === "200") {
@@ -93,7 +93,7 @@ const Passengers = ({ navigation }) => {
             <FlatList
               showsVerticalScrollIndicator={false}
               data={dataResponse.result}
-              keyExtractor={(item) => item.dependentDto.dependentId}
+              keyExtractor={(item) => item.bidDependMapId}
               refreshControl={
                 <RefreshControl
                   refreshing={isLoading}
@@ -112,7 +112,7 @@ const Passengers = ({ navigation }) => {
                     <Text
                       style={[styles.serviceProviderText, { marginBottom: 5 }]}
                     >
-                      {item.dependentDto?.parentDto?.parentName}
+                      {item.bidDto?.parentDto?.parentName}
                     </Text>
                     <View
                       style={[styles.cardInnerDataStyle, { marginBottom: 8 }]}
@@ -243,7 +243,7 @@ const Passengers = ({ navigation }) => {
                     </View>
                     <Text style={styles.dayAndTime}>
                       {selectedItem?.pickupTime &&
-                        formatTimeWithAMPM(selectedItem?.pickupTime)}
+                        formatTimeWithAMPM(selectedItem?.bidDto.bidPickupTime)}
                     </Text>
                   </View>
                 </View>
@@ -293,11 +293,11 @@ const Passengers = ({ navigation }) => {
                         },
                       ]}
                     > */}
-                    <Button title="OK" onPress={handleModalClose} />
-
+                     <Button title="OK" onPress={handleModalClose} />
                     {/* </Pressable> */}
                   </View>
                 </View>
+               
               </View>
             </View>
           </Modal>

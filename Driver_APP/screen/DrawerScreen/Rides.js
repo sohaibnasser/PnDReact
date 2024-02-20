@@ -12,6 +12,7 @@ import Activityindicator from "../../components/Activityindicator";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import Nodata from "../../components/Nodata";
+import { formatDate } from "../../Util/formatedDate";
 
 export const Rides = ({ navigation, route }) => {
   const isFocused = useIsFocused();
@@ -104,6 +105,9 @@ export const Rides = ({ navigation, route }) => {
   const renderItemOfthisMonth = ({ item, index }) => {
     const parts = item?.dependentVehicleMapDto.pickupLocation.split(",");
     const dropparts = item?.dependentVehicleMapDto.dropLocation.split(",");
+    const pickTime = formatDate(item?.pickupTime);
+    const dropTime = formatDate(item?.dropTime);
+    console.log("-------------",item)
 
     return (
       <>
@@ -129,7 +133,22 @@ export const Rides = ({ navigation, route }) => {
             <View>
               <View style={{ flexDirection: "row" }}>
                 <Icon name="circle-outline" color="#fff" size={15} />
-                <Text style={styles.fromAndtoTxt}>Pick Up</Text>
+                <Text style={styles.fromAndtoTxt}>Pick Up Location</Text>
+              </View>
+              <View
+                
+              >
+                <Text style={styles.FromAndToPlace}>
+                  {parts[0] && parts[0] !== "null" && parts[0]} {parts[1]}
+                </Text>
+
+                 
+              </View>
+            </View>
+            <View>
+              <View style={{ flexDirection: "row" }}>
+                <Icon name="circle-outline" color="#fff" size={15} />
+                <Text style={styles.fromAndtoTxt}>Pick Time</Text>
               </View>
               <View
                 style={{
@@ -138,12 +157,8 @@ export const Rides = ({ navigation, route }) => {
                 }}
               >
                 <Text style={styles.FromAndToPlace}>
-                  {parts[0] && parts[0] !== "null" && parts[0]} {parts[1]}
+                  {pickTime}
                 </Text>
-
-                {/* <Text style={styles.dayAndTime}> */}
-                {/* {formatTimeWithAMPM(item.pickTimeString)} */}
-                {/* </Text> */}
               </View>
             </View>
             <View>
@@ -161,6 +176,21 @@ export const Rides = ({ navigation, route }) => {
                   {dropparts[1]}
                 </Text>
                 {/* <Text style={styles.FromAndToPlace}>{dropparts[1]}</Text> */}
+              </View>
+            </View>
+            <View>
+              <View style={{ flexDirection: "row" }}>
+                <Icon name="circle-outline" size={15} />
+                <Text style={styles.fromAndtoTxt}>Drop Time</Text>
+              </View>
+              <View
+                 
+              >
+                <Text style={styles.FromAndToPlace}>
+                  {dropTime}
+                </Text>
+
+                 
               </View>
             </View>
           </View>

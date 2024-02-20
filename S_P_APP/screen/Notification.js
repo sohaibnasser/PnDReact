@@ -11,6 +11,7 @@ import { formatTimeWithAMPM } from "../Util/date";
 import Activityindicator from "../components/Activityindicator";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Nodata from "../components/Nodata";
+import { formatDate } from "../Util/formatedate";
 
 const Notification = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -73,8 +74,7 @@ const Notification = ({ navigation }) => {
               </View>
               <View>
                 <Text style={styles.dayAndTime}>
-                  {item?.pushNotifyDto.pushDate &&
-                    formatTimeWithAMPM(item.pushNotifyDto.pushDate)}
+                {formatDate(item.pushNotifyDto.pushDate)}
                 </Text>
               </View>
             </View>

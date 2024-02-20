@@ -774,7 +774,7 @@ const UpdateBid = ({ navigation, route }) => {
               </View>
             </View>
             <View>
-              <SwipButton title="ADD" onPress={AskForBidHandler} />
+              {status && status!=='Approved' && status !== 'Rejected' && <SwipButton title="ADD" onPress={AskForBidHandler} />}
             </View>
           </>
           {/* )} */}
